@@ -1,0 +1,18 @@
+<!-- Success Scenario Block while retirving posts-->
+<div class="mt-5" *ngIf="isSuccessResponse">
+  <div class="row ml-0 mr-0 mb-2">
+    <h4 class="col-sm-10">Posts </h4>
+    <button type="button" class="btn btn-outline-primary col-sm-2" data-toggle="modal" data-target="#exampleModal">
+      <i class="fa fa-plus-circle"></i> Create Post </button>
+  </div>
+  <!--Modal window contains create post form-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <app-create-post></app-create-post>
+  </div>
+  <!-- Table shows list of post and its details-->
+  <app-lists [fieldsConfig]="POSTS_FIELDS_CONFIG" [data]="posts" [isRowToBeClicked]="false"></app-lists>
+</div>
+<!-- Failure Scenario Block while retirving posts-->
+<div class="mt-5 alert alert-danger" *ngIf="!isSuccessResponse">
+  <strong>Error!</strong> An Error is occured while retriving posts
+</div>

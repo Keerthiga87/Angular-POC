@@ -1,0 +1,9 @@
+<!-- Success Scenario Block while retirving Users-->
+<div class="mt-5" *ngIf="isSuccessResponse">
+    <h4 class="col-sm-10">Users</h4>
+    <app-lists [fieldsConfig]="USERS_FIELDs_CONFIG" [data]="usersList" [isRowToBeClicked]="true" (selectedRow)="getUserDetailsForUser($event)"></app-lists>
+</div>
+<!-- Failure Scenario Block while retirving Users-->
+<div class="mt-5 alert alert-danger" *ngIf="!isSuccessResponse">
+    <strong>Error!</strong> An Error is occured while retriving Users
+</div>

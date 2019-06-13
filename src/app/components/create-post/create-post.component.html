@@ -1,0 +1,40 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <!--Modal Header-->
+    <div class="modal-header bg-light-blue">
+      <h5 class="modal-title" id="exampleModalLabel">Create Post</h5>
+      <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- Modal Body-->
+    <div class="modal-body">
+      <form class="dynamic-form" [formGroup]="group">
+        <ng-container *ngFor="let field of fields;">
+          <div class="form-group">
+            <label class="control-label" [ngClass]="field.required? 'is-required':null" for="{{field.key}}">{{field.label}}</label>
+            <input *ngIf="field.type==='text'" type="{{field.type}}" class="form-control" id="{{field.key}}" [formControlName]="field.key">
+            <textarea *ngIf="field.type==='textarea'" class="form-control" id="{{field.key}}" [formControlName]="field.key" rows="3"></textarea>
+            <!-- display validation errors-->
+            <div class="help-block" *ngFor="let validation of field.validations;">
+              <div class="has-error" *ngIf="hasError(field.key,validation.name)">{{validation.message}}</div>
+            </div>
+          </div>
+        </ng-container>
+      </form>
+      <div *ngIf="isSubmitted">
+        <div *ngIf="isSaved" class="alert alert-success">
+          <strong>Success!</strong> Post has been saved successfully
+        </div>
+        <div *ngIf="!isSaved" class="alert alert-danger">
+          <strong>Error!</strong> An Error is occured while saving post
+        </div>
+      </div>
+    </div>
+    <!--Modal Footer-->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-light" (click)="closeForm()">Close</button>
+      <button *ngIf="!isSubmitted" type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+  </div>
+</div>

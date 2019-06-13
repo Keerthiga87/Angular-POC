@@ -1,0 +1,15 @@
+/*header style*/
+.bg-light-blue{
+    border-color: #7abaff;
+    background-color: #b8daff;
+}
+
+/*validation style*/
+.has-error{
+    color:red;
+}
+
+.is-required::after{
+    content: "*";
+    color:red;
+}

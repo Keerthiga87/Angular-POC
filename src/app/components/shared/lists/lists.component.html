@@ -1,0 +1,17 @@
+<div class="table-responsive">
+  <table class="table" [ngClass]="isRowToBeClicked? 'table-hover':null">
+    <thead>
+      <tr>
+        <th *ngFor="let field of fieldsConfig">{{field.label}}</th>
+      </tr>
+    </thead>
+    <tbody class="tableBody">
+      <tr *ngFor="let data of data" (click)="isRowToBeClicked?selectedRow.emit(data):null">
+        <!--loop through the fields lists configured in json-->
+        <td *ngFor="let field of fieldsConfig">
+          {{data[field.key]}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

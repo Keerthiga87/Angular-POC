@@ -1,0 +1,46 @@
+<!-- Success Scenario Block while retirving user details-->
+<div class="card mt-5" *ngIf="isSuccessResponse">
+  <div class="row card-header mr-0 ml-0  text-center">
+    <button type="button" class="btn btn-outline-primary col-sm-1" (click)="goBack()">
+      <i class="fa fa-chevron-circle-left"></i> Back </button>
+    <h4 class="col-sm-11">
+      User Details
+    </h4>
+  </div>
+  <div class="card-body" *ngIf="userDetails">
+    <!-- dynamically create field based on fields configured in json-->
+    <div *ngFor="let field of USERS_DETAILS_Fields_Config">    
+      <!-- check if field contains subfield-->
+      <div *ngIf="field.subFields">
+        <h5 class="card-title">{{field.label}}</h5>
+          <!-- Loop through subfield-->
+        <div *ngFor="let subField of field.subFields">
+           <!-- check if subfield contains subfield-->
+          <div *ngIf="subField.subFields">
+            <h5 class="card-title">{{subField.label}}</h5>
+            <!-- Loop through subfield-->
+            <div *ngFor="let subChildField of subField.subFields">
+              <div class="col-sm-12">
+                <div class="col-sm-4 d-inline-block">{{subChildField.label}}</div>
+                <div class="col-sm-4 d-inline-block">{{userDetails[field.key][subField.key][subChildField.key]}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12" *ngIf="!subField.subFields">
+            <div class="col-sm-4 d-inline-block">{{subField.label}}</div>
+            <div class="col-sm-4 d-inline-block">{{userDetails[field.key][subField.key]}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12" *ngIf="!field.subFields">
+        <div class="col-sm-4 d-inline-block">{{field.label}}</div>
+        <div class="col-sm-4 d-inline-block">{{userDetails[field.key]}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Failue Scenario Block while retirving user details-->
+<div class="mt-5 alert alert-danger" *ngIf="!isSuccessResponse">
+  <strong>Error!</strong> An Error is occured while retriving user details
+</div>
